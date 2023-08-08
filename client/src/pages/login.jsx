@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const initialState = { email: '', password: '' };
@@ -43,9 +44,20 @@ const Login = () => {
           />
         </div>
 
-        <button type='submit' className='btn btn-primary'>
-          Submit
+        <button
+          type='submit'
+          className='btn btn-dark w-100'
+          disabled={email && password ? false : true}
+        >
+          Login
         </button>
+
+        <p className='my-2'>
+          You don't have an account?{' '}
+          <Link to='/register' style={{ color: 'crimson' }}>
+            Register Now
+          </Link>
+        </p>
       </form>
     </div>
   );
