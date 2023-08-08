@@ -42,7 +42,7 @@ const authControllers = {
 
       await newUser.save();
 
-      res.json({
+      res.status(201).json({
         msg: 'Registered Successfully!',
         access_token,
         user: { ...newUser._doc, password: '' },
@@ -54,6 +54,32 @@ const authControllers = {
   },
   login: async (req, res) => {
     try {
+      const { email, password } = req.body;
+      const user = await Users.findOne({ email }).populate(
+        'followers following',
+        '-password',
+      );
+      if (!user)
+        return res.status(400).json({ msg: 'This email does not exist.' });
+
+      const comparePassword = await bcrypt.compare(password, user.password);
+      if (!comparePassword)
+        return res.status(400).json({ msg: 'This password is incorrect.' });
+
+      const access_token = createAccessToken({ id: user._id });
+      const refresh_token = createRefreshToken({ id: user._id });
+
+      res.cookie('refreshtoken', refresh_token, {
+        httpOnly: true,
+        path: '/api/refresh_token',
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+      });
+
+      res.status(200).json({
+        msg: 'Login Successfully!',
+        access_token,
+        user: { ...user._doc, password: '' },
+      });
     } catch (err) {
       console.log(err);
       return res.status(500).json({ msg: err.message });
