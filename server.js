@@ -12,9 +12,12 @@ app.use(cookieParser());
 
 connectDB();
 
+//ROUTES
 app.get('/', (req, res) => {
   res.json({ Hello: 'World' });
 });
+
+app.use('/api', require('./routes/authRouter'));
 
 const PORT = process.env.PORT || 8080;
 
