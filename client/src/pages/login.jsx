@@ -1,22 +1,28 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login } from '../redux/actions/authAction';
 
 const Login = () => {
   const initialState = { email: '', password: '' };
   const [userData, setUserData] = useState(initialState);
   const { email, password } = userData;
+  const dispatch = useDispatch();
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   };
 
-  console.log(userData);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login(userData));
+  };
 
   return (
     <div className='auth_page'>
-      <form>
-        <h3 className='text-uppercase'>Note3-Social-Media</h3>
+      <form onSubmit={handleSubmit}>
+        <h3 className='text-uppercase text-center mb-4'>Note3-Social-Media</h3>
         <div className='form-group'>
           <label htmlFor='exampleInputEmail1'>Email address</label>
           <input

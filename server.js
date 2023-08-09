@@ -13,13 +13,13 @@ app.use(cookieParser());
 connectDB();
 
 //ROUTES
-app.get('/', (req, res) => {
-  res.json({ Hello: 'World' });
-});
+// app.get('/', (req, res) => {
+//   res.json({ Hello: 'World' });
+// });
 
 app.use('/api', require('./routes/authRouter'));
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () =>
   console.log(`Server started and running on port: ${PORT}`),

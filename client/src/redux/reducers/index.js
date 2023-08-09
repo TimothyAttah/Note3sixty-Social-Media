@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
-
+import { authReducer } from './authReducer';
+import { notifyReducer } from './notifyReducer';
 export const reducers = combineReducers({
-  hello: 2 + 2,
+  auth: authReducer,
+  notify: notifyReducer,
 });
