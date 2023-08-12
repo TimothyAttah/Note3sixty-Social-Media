@@ -3,7 +3,7 @@ import Register from './pages/register';
 import PageRender from './PageRender';
 import Login from './pages/login';
 import Home from './pages/home';
-import { Notify } from './components/notify/Notify';
+import { Alert } from './components/alert/Alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { refreshToken } from './redux/actions/authAction';
@@ -18,7 +18,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Notify />
+      <Alert />
       <input type='checkbox' id='theme' />
       <div className='App'>
         <div className='main'>
