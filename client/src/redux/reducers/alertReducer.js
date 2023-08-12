@@ -1,10 +1,10 @@
-import { TYPES } from '../types';
+import { GLOBALTYPES } from '../types';
 
 const initialState = {};
 
-export const notifyReducer = (state = initialState, action) => {
+export const alertReducer = (state = initialState, action) => {
   switch (action.type) {
-    case TYPES.NOTIFY:
+    case GLOBALTYPES.ALERT:
       console.log(action);
       return action.payload;
     default:

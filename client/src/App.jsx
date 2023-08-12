@@ -3,15 +3,27 @@ import Register from './pages/register';
 import PageRender from './PageRender';
 import Login from './pages/login';
 import Home from './pages/home';
+import { Alert } from './components/alert/Alert';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { refreshToken } from './redux/actions/authAction';
 
 const App = () => {
+  const { auth } = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(refreshToken());
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
+      <Alert />
       <input type='checkbox' id='theme' />
       <div className='App'>
         <div className='main'>
           <Routes>
-            <Route path='/' element={<Login />} />
+            <Route path='/' element={auth.token ? <Home /> : <Login />} />
             <Route path='/:page' element={<PageRender />} />
             <Route path='/:page/:id' element={<PageRender />} />
           </Routes>
