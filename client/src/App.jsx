@@ -4,8 +4,18 @@ import PageRender from './PageRender';
 import Login from './pages/login';
 import Home from './pages/home';
 import { Notify } from './components/notify/Notify';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { refreshToken } from './redux/actions/authAction';
 
 const App = () => {
+  const { auth } = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(refreshToken());
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Notify />
@@ -13,7 +23,7 @@ const App = () => {
       <div className='App'>
         <div className='main'>
           <Routes>
-            <Route path='/' element={<Login />} />
+            <Route path='/' element={auth.token ? <Home /> : <Login />} />
             <Route path='/:page' element={<PageRender />} />
             <Route path='/:page/:id' element={<PageRender />} />
           </Routes>
