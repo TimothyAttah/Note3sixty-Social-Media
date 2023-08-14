@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { register } from '../redux/actions/authAction';
 
 const Register = () => {
-  const { auth } = useSelector((state) => state);
+  const { auth, alert } = useSelector((state) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -49,9 +49,10 @@ const Register = () => {
             onChange={handleChangeInput}
             value={fullname}
             name='fullname'
+            style={{ background: `${alert.fullname ? '#fd2d6a14' : ''}` }}
           />
-          <small id='emailHelp' className='form-text text-muted'>
-            We'll never share your email with anyone else.
+          <small id='emailHelp' className='form-text text-danger'>
+            {alert.fullname ? alert.fullname : ''}
           </small>
         </div>
         <div className='form-group'>
@@ -63,9 +64,10 @@ const Register = () => {
             onChange={handleChangeInput}
             value={username.toLowerCase().replace(/ /g, '')}
             name='username'
+            style={{ background: `${alert.username ? '#fd2d6a14' : ''}` }}
           />
-          <small id='emailHelp' className='form-text text-muted'>
-            We'll never share your email with anyone else.
+          <small id='emailHelp' className='form-text text-danger'>
+            {alert.username ? alert.username : ''}
           </small>
         </div>
         <div className='form-group'>
@@ -78,9 +80,10 @@ const Register = () => {
             onChange={handleChangeInput}
             value={email}
             name='email'
+            style={{ background: `${alert.username ? '#fd2d6a14' : ''}` }}
           />
-          <small id='emailHelp' className='form-text text-muted'>
-            We'll never share your email with anyone else.
+          <small id='emailHelp' className='form-text text-danger'>
+            {alert.email ? alert.email : ''}
           </small>
         </div>
 
@@ -94,11 +97,15 @@ const Register = () => {
               onChange={handleChangeInput}
               value={password}
               name='password'
+              style={{ background: `${alert.username ? '#fd2d6a14' : ''}` }}
             />
             <small onClick={() => setShow(!show)}>
               {show ? 'Hide' : 'Show'}
             </small>
           </div>
+          <small id='emailHelp' className='form-text text-danger'>
+            {alert.password ? alert.password : ''}
+          </small>
         </div>
 
         <div className='form-group'>
@@ -111,11 +118,15 @@ const Register = () => {
               onChange={handleChangeInput}
               value={cf_password}
               name='cf_password'
+              style={{ background: `${alert.cf_password ? '#fd2d6a14' : ''}` }}
             />
             <small onClick={() => setShowCf_password(!showCf_password)}>
               {showCf_password ? 'Hide' : 'Show'}
             </small>
           </div>
+          <small id='emailHelp' className='form-text text-danger'>
+            {alert.cf_password ? alert.cf_password : ''}
+          </small>
         </div>
 
         <div className='row justify-content-between mx-0 mb-1'>
