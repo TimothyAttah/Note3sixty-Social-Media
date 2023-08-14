@@ -19,7 +19,7 @@ const Register = () => {
     gender: 'male',
   };
   const [userData, setUserData] = useState(initialState);
-  const { fullname, username, email, password, cf_password, gender } = userData;
+  const { fullname, username, email, password, cf_password } = userData;
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
