@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { logout } from '../redux/actions/authAction';
+import { GLOBALTYPES } from '../redux/types';
 
 export const Header = () => {
   const navLinks = [
@@ -11,7 +12,7 @@ export const Header = () => {
     { label: 'Notify', icon: 'favorite', path: '/notify' },
   ];
 
-  const { auth } = useSelector((state) => state);
+  const { auth, theme } = useSelector((state) => state);
   const dispatch = useDispatch();
   const { pathname } = useLocation();
 
@@ -51,7 +52,7 @@ export const Header = () => {
                 aria-haspopup='true'
                 aria-expanded='false'
               >
-                User
+                <img src={auth.user.avatar} alt='avatar' className='avatar' />
               </span>
               <div className='dropdown-menu' aria-labelledby='navbarDropdown'>
                 <Link
@@ -60,8 +61,14 @@ export const Header = () => {
                 >
                   Profile
                 </Link>
-                <label htmlFor='theme' className='dropdown-item'>
-                  Dark mode
+                <label
+                  htmlFor='theme'
+                  className='dropdown-item'
+                  onClick={() =>
+                    dispatch({ type: GLOBALTYPES.THEME, payload: !theme })
+                  }
+                >
+                  {theme ? 'Light Mode' : 'Dark Mode'}
                 </label>
 
                 <div className='dropdown-divider'></div>
