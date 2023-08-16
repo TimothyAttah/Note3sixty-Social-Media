@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { logout } from '../redux/actions/authAction';
 import { GLOBALTYPES } from '../redux/types';
+import { Avatar } from './Avatar';
 
 export const Header = () => {
   const navLinks = [
@@ -25,7 +26,6 @@ export const Header = () => {
       <nav className='navbar navbar-expand-lg navbar-light bg-light justify-content-between align-middle'>
         <Link to='/'>
           <h1 className='navbar-brand text-uppercase p-0 m-0 '>
-            {' '}
             Note3SixtyMedia
           </h1>
         </Link>
@@ -52,7 +52,7 @@ export const Header = () => {
                 aria-haspopup='true'
                 aria-expanded='false'
               >
-                <img src={auth.user.avatar} alt='avatar' className='avatar' />
+                <Avatar src={auth.user.avatar} />
               </span>
               <div className='dropdown-menu' aria-labelledby='navbarDropdown'>
                 <Link
