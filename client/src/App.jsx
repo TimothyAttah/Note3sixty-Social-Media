@@ -1,6 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import PageRender from './PageRender';
+import PageRender from './customRouter/PageRender';
+import PrivateRouter from './customRouter/PrivateRouter';
+
 import Login from './pages/login';
+import Register from './pages/register';
 import Home from './pages/home';
 import { Alert } from './components/alert/Alert';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,8 +28,11 @@ const App = () => {
           {auth.token && <Header />}
           <Routes>
             <Route path='/' element={auth.token ? <Home /> : <Login />} />
-            <Route path='/:page' element={<PageRender />} />
-            <Route path='/:page/:id' element={<PageRender />} />
+            <Route path='/register' element={<Register />} />
+            <Route element={<PrivateRouter />}>
+              <Route path='/:page' element={<PageRender />} />
+              <Route path='/:page/:id' element={<PageRender />} />
+            </Route>
           </Routes>
         </div>
       </div>
