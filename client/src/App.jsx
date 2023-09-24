@@ -9,7 +9,7 @@ import { Alert } from './components/alert/Alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { refreshToken } from './redux/actions/authAction';
-import { Header } from './components/Header';
+import { Header } from './components/header/Header';
 
 const App = () => {
   const { auth } = useSelector((state) => state);
