@@ -18,6 +18,7 @@ connectDB();
 // });
 
 app.use('/api', require('./routes/authRouter'));
+app.use('/api', require('./routes/userRouter'));
 
 const PORT = process.env.PORT || 8080;
 
